@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>商务模板</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="js/main.js"></script>
+    <!--search jQuery-->
+    <!--mycart-->
+    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <link rel="stylesheet" href="/css/css.css">
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="qd_menu::mymenu1">
+        </div>
+    </div>
+</div>
+<!--header-->
+<!--主页面-->
+<style>
+    div.ex
+    {
+        padding:10px;
+        border:1px dashed gray;
+        margin-left:0px;
+        margin-top:10px;
+    }
+</style>
+<div class="container" >
+    <div class="grid_1 grid_1">
+        <h2>Download AllFree</h2>
+        <ol class="breadcrumb">
+            <li><a href="/user/all" class="">首页</a></li>
+            <li class="active">商务模板</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 in-gp-tl" style="margin-left: 15px;">
+            <form action="/user/findReByName" method="post">
+                <div class="input-group">
+                            <input type="text" class="form-control" style="border:2px solid gray;" placeholder="Search for..."name="reName"  >
+                    <span class="input-group-btn">
+                            <button class="btn btn-success" style="background-color: #0e73d0" type="submit">查找模板</button>
+                        </span>
+                </div>
+            </form>
+            <!-- /input-group -->
+        </div>
+    </div>
+    <div class="ex">
+        <div class="row" style="margin-bottom: 2px;margin-top:5px;padding:5px;">
+        <span style="font-size: 23px;color: #0d59af;margin: 10px;"><b>求职意向: </b></span>
+        <div  th:each="v :${vocationinfo}" style="font-size: 20px">
+            <div class="col-sm-1 ">
+                <a th:href="@{/user/findReByID(id=${v.vocation_id})}"> <p th:value="${v.vocation_id}" th:text="${v.vocation_name}">最新</p></a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <style>
+        #div1{
+            width: 270px;
+            border-bottom: 1px solid #0e2e42;
+            margin-left: 15px;
+        }
+    </style>
+    <div class="row">
+        <div class="input-group" style="margin-left: 15px;margin-top: 2%;" >
+            <div class="template_filters filters clearfix">
+                <div  style="font-size: 20px;padding-left:0px;margin-top: 1%" >
+                    <a href="/user/findReByDate"> <span class="icon icon-time">最新</span></a>&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+                    <a href="/user/findReByTimes"> <span class="icon icon-hot">人气</span></a>&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+                    <a href="/user/findReByFenshu"><span class="icon icon-about">好评</span></a>
+                </div>
+                <div style="height: 1px;width: 45%;color: #0e2e42"></div>
+            </div>
+        </div><!-- /input-group -->
+        <div class="row">
+            <div class="col-sm-6 " id="div1">
+            </div>
+            <div class="col-sm-4 ">
+            </div>
+        </div>
+    </div>
+    <div style="margin-left: 0px; margin-bottom: 10px;padding-top: 23px; ">
+    <table class="col-lg-10" >
+        <tr th:each="ResumeInfo :${resumeinfo}" >
+            <td>
+                <div  class="col-lg-6 col-lg-offset-3"  style="margin-bottom: 15px;margin-left: 0px;margin-right: 130px;float: left;">
+                     <img class="img-rounded"
+                          height="295" width="210" id="imgshow"
+                          th:src="'http://localhost:8080'+
+                                  ${ResumeInfo.resume_download_address}+'/'+
+                                  ${ResumeInfo.download_mini_address}" >
+                </div>
+            </td>
+            <td style="font-size: 20px;vertical-align:text-top"><a th:href="@{/user/download(id=${ResumeInfo.rid})}">
+                <p style="color: #0d59af;margin-top: 0px ;float: top;">简历介绍：<span th:text="${ResumeInfo.remark}"></span></p></a>
+                <p>上传时间：<span th:text="${ResumeInfo.resume_up_date}"></span></p>
+                <p>适用行业：<span th:text="${ResumeInfo.vocation_name}"></span></p>
+                <p >作者：<span th:id="${ResumeInfo.rid}"  th:text="${ResumeInfo.hid}"></span></p >
+                <p th:style="${ResumeInfo.resume_times} >100?'color: #AF1D0D;font-size: 20px;':''">下载次数：<span th:text="${ResumeInfo.resume_times}"  ></span></p>
+            </td>
+        </tr>
+    </table>
+    </div>
+</div>
+<!--主页面-->
+<!---footer--->
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+
+</body>
+</html>

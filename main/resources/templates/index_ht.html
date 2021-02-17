@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+
+    <title>数据统计 | 求职加油站后台管理系统</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/ht/css/bootstrap.css" rel="stylesheet">
+    <link href="/ht/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/ht/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/ht/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/ht/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/ht/css/style.css" rel="stylesheet">
+    <link href="/ht/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- javascripts -->
+    <script src="/ht/js/jquery.js"></script>
+    <script src="/ht/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/ht/js/jquery.scrollTo.min.js"></script>
+    <script src="/ht/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--custome script for all page-->
+    <script src="/ht/js/scripts.js"></script>
+</head>
+
+<body>
+<!-- container section start -->
+<section id="container" class="">
+    <div th:replace="menu::myheader">
+    </div>
+    <!--左边菜单栏 start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse " th:replace="menu::myaside">
+        </div>
+    </aside>
+    <!--左边菜单栏 end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <!--overview start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa-laptop"></i> 数据统计</h3>
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="/ht/index">首页</a></li>
+                        <li><i class="fa fa-laptop"></i>数据统计</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="info-box blue-bg">
+                        <i class="fa fa-cloud-download"></i>
+                        <div class="count" th:text="${reNum}" ></div>
+                        <div class="title" >模板总量</div>
+                    </div>
+                    <!--/.info-box-->
+                </div>
+                <!--/.col-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="info-box brown-bg">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <div class="count" th:text="${userNum}">7.538</div>
+                        <div class="title">用户数量</div>
+                    </div>
+                    <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="info-box dark-bg">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <div class="count" th:text="${hrNum}">4.362</div>
+                        <div class="title">HR数量</div>
+                    </div>
+                    <!--/.info-box-->
+                </div>
+                <!--/.col-->
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body-map">
+                            <div id="main" style="width: 1000px;height:400px;"></div>
+                            <!-- 热门简历模板排行榜 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body-map">
+                            <div id="resume" style="width: 1000px;height:400px;"></div>
+                            <!---模板下载次数排行top20-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body-map">
+                            <div id="vocation" style="width: 1000px;height:400px;"></div>
+                            <!--职业需求排行榜-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body-map">
+                            <div id="users" style="width: 1000px;height:400px;"></div>
+                            <!---用户组成比例-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<!-- container section start -->
+<script src="/js/echarts.min.js" ></script>
+<script src="/js/mouLianBojs.js" type="text/javascript" ></script>
+<script >
+        var myChart = echarts.init(document.getElementById('main'));
+        var mydata = [[${nums}]];   //  thymeleaf 表达式在JS中的使用，注意：这里是数字类型
+        var aa = "[[${cate}]]";
+        //***
+        var title = [];//一个算法，字符能显示，字符类型必须要搞
+        var info = '';
+        var index = 0;
+        var onex = "";
+        aa = aa.substr(1, aa.length);
+        var len = mydata.length;
+        for (var i = 1; i <= len; i++) {
+            info += "第" + i + "次：&nbsp;&nbsp;&nbsp;";
+            index = aa.indexOf(',');
+            if (len == i) {
+                onex = aa.substring(0, aa.length - 1);
+            } else {
+                onex = aa.substring(0, index);
+            }
+            info += "aa:  " + aa;
+            info += "&nbsp;&nbsp;&nbsp; onex: " + onex + "<br/>";
+            aa = aa.substr(index + 1, aa.length);
+            title.push(onex);
+        }
+//****
+        option = {
+            color: ['#3398DB'],
+            title: {
+                text: '热门简历模板排行榜'
+            },
+            tooltip: {//提示效果
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'//鼠标碰到的时候cross是十字准星，show是阴影
+                }
+            },
+            grid: {
+                top: '20%',
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true,
+                width: '80%',
+                heigtht: '80%'
+            },//和边的距离
+
+            xAxis: {
+                type: 'category',
+                axisLabel: {
+                    interval: 0,
+                    rotate: 45,
+                },
+                data: title,//动态的title就给data了
+            },
+
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: mydata,//动态的给data了
+                barWidth: 50,
+                type: 'bar'
+
+            }]
+        };//option之后setoption就是表格，bar是柱状图，line是折线图
+//使用指定的配置项和数据显示图标
+        myChart.setOption(option);
+
+//模板下载排行榜
+        var myChart2 = echarts.init(document.getElementById('resume'));
+        var mydata = [[${nums2}]];   //  thymeleaf 表达式在JS中的使用，注意：这里是数字类型
+        var aa = "[[${cate2}]]";
+//***
+        var title = [];//一个算法，字符能显示，字符类型必须要搞
+        var info = '';
+        var index = 0;
+        var onex = "";
+        aa = aa.substr(1, aa.length);
+        var len = mydata.length;
+        for (var i = 1; i <= len; i++) {
+            info += "第" + i + "次：&nbsp;&nbsp;&nbsp;";
+            index = aa.indexOf(',');
+            if (len == i) {
+                onex = aa.substring(0, aa.length - 1);
+            } else {
+                onex = aa.substring(0, index);
+            }
+            info += "aa:  " + aa;
+            info += "&nbsp;&nbsp;&nbsp; onex: " + onex + "<br/>";
+            aa = aa.substr(index + 1, aa.length);
+            title.push(onex);
+        }
+            //****
+        option2 = {
+            title: {
+                text: '职业需求排行榜'
+            },
+            tooltip: {//提示效果
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'//鼠标碰到的时候cross是十字准星，show是阴影
+                }
+            },
+            grid: {
+                top: '20%',
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },//和边的距离
+            xAxis: {
+                type: 'category',
+                axisLabel: {
+                    interval: 0,
+                    rotate: 45,
+                },
+                data: title,//动态的title就给data了
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: mydata,//动态的给data了
+                barWidth: 50,
+                type: 'bar'
+            }]
+        };//option之后setoption就是表格，bar是柱状图，line是折线图
+//使用指定的配置项和数据显示图标
+        myChart2.setOption(option2);
+
+//职业需求排行榜
+        var myChart3 = echarts.init(document.getElementById('vocation'));
+        var mydata = [[${nums3}]];   //  thymeleaf 表达式在JS中的使用，注意：这里是数字类型
+        var aa = "[[${cate3}]]";
+        //***
+        var title = [];//一个算法，字符能显示，字符类型必须要搞
+        var info = '';
+        var index = 0;
+        var onex = "";
+        aa = aa.substr(1, aa.length);
+        var len = mydata.length;
+        for (var i = 1; i <= len; i++) {
+            info += "第" + i + "次：&nbsp;&nbsp;&nbsp;";
+            index = aa.indexOf(',');
+            if (len == i) {
+                onex = aa.substring(0, aa.length - 1);
+            } else {
+                onex = aa.substring(0, index);
+            }
+            info += "aa:  " + aa;
+            info += "&nbsp;&nbsp;&nbsp; onex: " + onex + "<br/>";
+            aa = aa.substr(index + 1, aa.length);
+            title.push(onex);
+        }
+        //****
+        option3 = {
+            color: ['#3398DB'],
+            title: {
+                text: '人气HRtop10'
+            },
+            tooltip: {//提示效果
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'//鼠标碰到的时候cross是十字准星，show是阴影
+                }
+            },
+            grid: {
+                top: '20%',
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },//和边的距离
+            xAxis: {
+                type: 'category',
+                axisLabel: {
+                    interval: 0,
+                    rotate: 45,
+                },
+                data: title,//动态的title就给data了
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: mydata,//动态的给data了
+                barWidth: 50,
+                type: 'bar'
+            }]
+        };//option之后setoption就是表格，bar是柱状图，line是折线图
+//使用指定的配置项和数据显示图标
+        myChart3.setOption(option3);
+
+//岗位需求排行榜
+        var myChart4 = echarts.init(document.getElementById('users'));
+        option4 = {
+
+            title: {
+                text: '求职加油站系统用户比例',
+                subtext: '',
+                left: 'true'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                type: 'scroll',
+                orient: 'vertical',
+                right: 10,
+                top: 20,
+                bottom: 20,
+                data: ['VIP用户','普通用户',  'HR', '管理员']
+            },
+            series: [
+                {
+                    name: '姓名',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['40%', '50%'],
+                    data: [
+                        {value: [[${countVipUser}]], name: 'VIP用户', selected: true},
+                        {value: [[${countNotVipUser}]], name: '普通用户', selected: true},
+                        {value: [[${hrNum}]], name: 'HR', selected: true},
+                        {value: [[${countAllManagerNum}]], name: '管理员', selected:true}
+                        ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        myChart4.setOption(option4);
+</script>
+</body>
+</html>

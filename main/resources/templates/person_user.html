@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>个人信息</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#inputfile').change(function(){
+                //获取input file的files文件数组;
+
+                //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+                var file = $('#inputfile').get(0).files[0];
+                //创建用来读取此文件的对象
+                var reader = new FileReader();
+                //使用该对象读取file文件
+                reader.readAsDataURL(file);
+                //读取文件成功后执行的方法函数
+                reader.onload=function(e){
+                    //读取成功后返回的一个参数e，整个的一个进度事件
+                    console.log(e);
+                    //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+                    //的base64编码格式的地址
+                    $('#imgshow').get(0).src = e.target.result;
+                }
+            })
+            $('#inputfile1').change(function(){
+                //获取input file的files文件数组;
+
+                //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+                var file = $('#inputfile1').get(0).files[0];
+                //创建用来读取此文件的对象
+                var reader = new FileReader();
+                //使用该对象读取file文件
+                reader.readAsDataURL(file);
+                //读取文件成功后执行的方法函数
+                reader.onload=function(e){
+                    //读取成功后返回的一个参数e，整个的一个进度事件
+                    console.log(e);
+                    //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+                    //的base64编码格式的地址
+                    $('#imgshow1').get(0).src = e.target.result;
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+
+<!-- 导航栏 -->
+<div class="heder-bottom" th:fragment="mymenu1">
+    <div class="container">
+        <div class="logo-nav">
+            <div class="logo-nav-left">
+                <h1><a >Find Job <span>Gas station</span></a></h1>
+            </div>
+            <div class="logo-nav-left1">
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header nav_2">
+                        <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                                data-target="#bs-megadropdown-tabs">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/user/all">首页</a></li>
+                            <li class="active"><a href="/user/person_index" class="act">我的信息</a></li>
+                            <!-- Mega Menu -->
+                            <li><a href="/user/person_reserve">我的预约</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+</div>
+<!--header-->
+<!--content-->
+<style>
+    .con {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+</style><!--居中样式-->
+<div class="container">
+    <div class="grid_1 grid_1">
+        <h2>Person Center</h2>
+        <ol class="breadcrumb">
+            <li><a href="/user/all" class="">首页</a></li>
+            <li class="active">我的信息</li>
+        </ol>
+    </div >
+    <div class="content">
+        <!-- page start-->
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h3>个人信息</h3></div>
+            <form class="form-horizontal" action="/user/updateMessage" method="post"  enctype="multipart/form-data">
+                <div id="con">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <div  class="col-sm-10">
+                            <p><img th:src="'http://localhost:8080/images/upload/'+${user.user_headpic}" id="imgshow" class="img-thumbnail"  width="150px" height="180px" ></p>
+                            <input class="form-control" type="file" id="inputfile" name="user_pic">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <BR>
+                    <div class="row">
+                        <div class="row">
+                        <div class="form-group">
+                            <label for="user_account" class="col-sm-2 control-label">账号：</label>
+                                <div class="col-sm-10">
+                                    <span id="user_account" th:text="${user.user_account}" ></span>
+                                        <input  type="hidden" th:value="${user.user_account}" name="user_account" >
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">姓名：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="inputEmail3" th:value="${user.user_name}" name="user_name" >
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">性别：</label>
+                                <div class="col-sm-10">
+                                    <label class="radio-inline">
+                                    <input type="radio" class="form-control"  th:checked="${user.user_sex}==true?1:0"  name="user_sex" id="inputPassword3" value="1" >男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" class="form-control"  th:checked="${user.user_sex}==true?0:1"  name="user_sex" id="inputPassword3" value="0">女
+                            </label>
+                        </div>6
+                        </div>
+                        <div class="form-group">
+                             <label for="inputEmail3" class="col-sm-2 control-label">电话：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="inputEmail3" th:value="${user.user_tel}" name="user_tel" >
+                             </div>
+                        </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-5">
+                                    <button type="submit" class="btn btn-success">信息修改</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </form>
+        </div>
+    <!--content-->
+    </div>
+</div>
+<!---footer--->
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+<!--copy-->
+
+<!--copy-->
+</body>
+</html>

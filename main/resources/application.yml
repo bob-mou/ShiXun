@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/shixun?serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 586070
+

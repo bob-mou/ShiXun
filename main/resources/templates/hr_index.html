@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HR主页面</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+    <script src="/js/responsiveslides.min.js"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+
+        //定时更新
+        $(function () {
+            var time;
+            $("#star").click(function () {
+                console.log("开启自动更新......");
+                time = setInterval(function () {
+                    $.get("[[@{/hr/findAllJSON}]]",function (res) {
+                        //遍历
+                        $.each(res,function (index,ResumeInfo) {
+                            $("#"+ResumeInfo.rid).text(ResumeInfo.resume_times);
+                        })
+                    });
+                },3000);
+            })
+            $("#stop").click(function () {
+                console.log("关闭自动更新......");
+                clearInterval(time);
+            });
+        });
+    </script>
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+    <!--start-rate-->
+    <script src="/js/jstarbox.js"></script>
+    <link rel="stylesheet" href="/css/jstarbox.css" type="text/css" media="screen" charset="utf-8"/>
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery('.starbox').each(function () {
+                var starbox = jQuery(this);
+                starbox.starbox({
+                    average: starbox.attr('data-start-value'),
+                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                    ghosting: starbox.hasClass('ghosting'),
+                    autoUpdateAverage: starbox.hasClass('autoupdate'),
+                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                    stars: starbox.attr('data-star-count') || 5
+                }).bind('starbox-value-changed', function (event, value) {
+                    if (starbox.hasClass('random')) {
+                        var val = Math.random();
+                        starbox.next().text(' ' + val);
+                        return val;
+                    }
+                })
+            });
+        });
+    </script>
+    <!--//End-rate-->
+</head>
+<body>
+<!--content-->
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="hr_menu::mymenu3">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="hr_menu::mymenu4">
+        </div>
+    </div>
+</div>
+<!--header-->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa fa-bars"></i>HR简历模板管理</h3>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-body">
+            <button id="star">开启定时更新</button>
+            <button id="stop">结束定时更新</button>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th>编号</th>
+                <th>上传时间</th>
+                <th>发布状态</th>
+                <th>行业名称</th>
+                <th>下载地址</th>
+                <th>下载次数</th>
+                <th>缩略图</th>
+                <th style="width: 170px">备注</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="ResumeInfo,reStar:${resumeinfo}">
+                <td th:text="${reStar.index+1}"> 123 </td>
+                <td th:text="${ResumeInfo.resume_up_date}"> 123 </td>
+                <td th:text="${ResumeInfo.state}"> 123 </td>
+                <td th:text="${ResumeInfo.vocation_name}"> 123 </td>
+                <td th:text="${ResumeInfo.resume_download_address}"> 123 </td>
+                <td th:id="${ResumeInfo.rid}"  th:text="${ResumeInfo.resume_times}"> 123 </td>
+                <td><div  class="col-lg-4" >
+                    <img class="img-rounded"
+                            height="210" width="150" id="imgshow"
+                            th:src="'http://localhost:8080'+
+                            ${ResumeInfo.resume_download_address}+'/'+
+                            ${ResumeInfo.download_mini_address}" >
+                </div></td>
+                <td th:text="${ResumeInfo.remark}"> 123 </td>
+                <td>
+                    <a th:href="@{/hr/download(id=${ResumeInfo.rid},openStyle='inline')}" >在线打开</a>|
+                    <a th:href="@{/hr/apply(rid=${ResumeInfo.rid})}" >申请发布</a>|
+                    <a th:href="@{/hr/delete(rid=${ResumeInfo.rid})}">下架</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+<!--product-->
+</div>
+<!--content-->
+<!---footer--->
+<div class="footer-w3l" style="padding: 15px">
+    <div class="container" th:replace="hr_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+</body>
+</html>

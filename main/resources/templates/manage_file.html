@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/ht/img/favicon.png">
+
+    <title>Blank | 求职加油站后台管理系统</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/ht/css/bootstrap.css" rel="stylesheet">
+    <link href="/ht/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/ht/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/ht/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/ht/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/ht/css/style.css" rel="stylesheet">
+    <link href="/ht/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="/ht/js/html5shiv.js"></script>
+      <script src="/ht/js/respond.min.js"></script>
+      <script src="/ht/js/lte-ie7.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- container section start -->
+    <section id="container" class="">
+        <div th:replace="menu::myheader">
+        </div>
+        <!--左边菜单栏 start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse " th:replace="menu::myaside">
+            </div>
+        </aside>
+        <!--左边菜单栏 end-->
+
+        <!--主页面内容 start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header"><i class="fa fa fa-bars"></i> 档案管理</h3>
+                    </div>
+                </div>
+                    <!-- page start-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <section class="panel">
+                                <!--tab nav start-->
+                                <section class="panel">
+                                    <header class="panel-heading tab-bg-primary ">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#home">咨询者管理</a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#about">HR管理</a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#profile">管理员管理</a>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                </section>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div id="home" class="tab-pane active">
+                                            <header class="panel-heading">
+                                                咨询者档案表
+                                            </header>
+                                            <!-- 查询栏输入框-->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <section class="panel">
+                                                        <div class="panel-body">
+                                                            <form class="form-inline" method="post" action="/user/search_file_user">
+                                                                <div class="form-group">
+                                                                    <input type="text"  name="account" class="form-control" id="exampleInputEmail2" placeholder="账号">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" name="search_name"  class="form-control" id="exampleInputPassword2" placeholder="名字">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">查询</button>
+                                                            </form>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <table class="table table-striped table-advance table-hover">
+                                                <tbody>
+                                                    <tr>
+                                                        <th><i class="icon_profile"></i>序号</th>
+                                                        <th><i class="icon_mail_alt"></i>用户头像</th>
+                                                        <th><i class="icon_profile"></i>账户名称</th>
+                                                        <th><i class="glyphicon glyphicon-tags"></i>名字</th>
+                                                        <th><i class="glyphicon glyphicon-certificate"></i>密码</th>
+                                                        <th><i class="icon_mail_alt"></i>性别</th>
+                                                        <th><i class="icon_mobile"></i> 电话</th>
+                                                        <th><i class="icon_calendar"></i>是否是会员</th>
+                                                    </tr>
+                                                    <tr th:each="u,userStat :${userinfo}">
+                                                        <td th:text="${userStat.index+1}">序号</td>
+                                                        <td><img
+                                                                class="img-circle"
+                                                                height="100" th:src="'http://localhost:8080/images/upload/'+${u.user_headpic}" width="100"> </td>
+                                                        <td th:text="${u.user_account}">账户名称</td>
+                                                        <td th:text="${u.user_name}">名字</td>
+                                                        <td th:text="${u.user_password}">密码</td>
+                                                        <td th:text="${u.user_sex}==true?'男':'女'">性别</td>
+                                                        <td th:text="${u.user_tel}">电话</td>
+                                                        <td th:text="${u.Vip}==true?'会员':'普通用户'">会员</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center">
+                                                <ul class="pagination">
+                                                    <li><a href="#">«</a></li>
+                                                    <li><a href="#">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#">3</a></li>
+                                                    <li><a href="#">4</a></li>
+                                                    <li><a href="#">5</a></li>
+                                                    <li><a href="#">»</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div id="about" class="tab-pane">
+                                            <header class="panel-heading">
+                                                HR档案表
+                                            </header>
+                                            <!-- 查询栏输入框-->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <section class="panel">
+                                                        <div class="panel-body">
+                                                            <form class="form-inline" id="exampleInputEmail2" method="post" action="/hr/search_file_hr">
+                                                                <div class="form-group">
+                                                                    <input type="text"  name="account" class="form-control"  placeholder="账号">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text"  name="name"  class="form-control"  placeholder="名字">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">查询</button>
+                                                            </form>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <table class="table table-striped table-advance table-hover">
+                                                <tbody>
+                                                <tr>
+                                                    <th><i class="icon_profile"></i>序号</th>
+                                                    <th><i class="icon_mail_alt"></i>头像</th>
+                                                    <th><i class="icon_profile"></i>账号</th>
+                                                    <th><i class="glyphicon glyphicon-tags"></i>名字</th>
+                                                    <th><i class="glyphicon glyphicon-certificate"></i>密码</th>
+                                                    <th><i class="icon_calendar"></i>注册日期</th>
+                                                    <th><i class="icon_mail_alt"></i>性别</th>
+                                                    <th><i class="icon_mobile"></i> 电话</th>
+                                                    <th><i class="icon_mobile"></i> qq</th>
+                                                    <th><i class="icon_profile"></i>审核结果</th>
+                                                    <th><i class="icon_profile"></i>是否处理</th>
+                                                    <th><i class="icon_cogs"></i> 操作</th>
+                                                </tr>
+                                                <tr th:each="h, userStat :${hrinfo}">
+                                                    <td th:text="${userStat.index+1}">序号</td>
+                                                    <td><img
+                                                            class="img-circle"
+                                                            height="100" th:src="'http://localhost:8080/images/upload/'+${h.hr_headpic}" width="100"> </td>
+                                                    <td th:text="${h.hr_account}">账号</td>
+                                                    <td th:text="${h.hr_name}">名字</td>
+                                                    <td th:text="${h.hr_password}">密码</td>
+                                                    <td th:text="${h.register_date}">注册日期</td>
+                                                    <td th:text="${h.hr_sex}==true?'男':'女'">性别</td>
+                                                    <td th:text="${h.hr_tel}">电话</td>
+                                                    <td th:text="${h.hr_qq}">QQ</td>
+                                                    <td th:text="${h.isHr}==true?'是HR':'不是HR'">审核结果</td>
+                                                    <td th:text="${h.isdealwith}==true?'已处理':'未处理'"></td>
+                                                    <td>
+                                                        <form class="form-inline" method="get" action="/ht/check_hr">
+                                                            <div class="text-right">
+                                                                <input type="hidden" name="hid" th:value="${h.hid}">
+                                                                <button type="submit" class="btn btn-info" >查看材料</button>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center">
+                                                <ul class="pagination">
+                                                    <li><a href="#">«</a></li>
+                                                    <li><a href="#">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#">3</a></li>
+                                                    <li><a href="#">4</a></li>
+                                                    <li><a href="#">5</a></li>
+                                                    <li><a href="#">»</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div id="profile" class="tab-pane">
+                                            <header class="panel-heading">
+                                                管理者档案表
+                                            </header>
+                                            <!-- 查询栏输入框-->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <section class="panel">
+                                                        <div class="panel-body">
+                                                            <form class="form-inline" method="post" action="/ht/search_file_manager">
+                                                                <div class="form-group">
+                                                                    <label class="sr-only" for="exampleInputEmail2">注册日期</label>
+                                                                    <input type="date" th:value="${date_manager}" name="date_manager" class="form-control" id="exampleInputEmail2" placeholder="注册日期">--或--
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="sr-only" for="exampleInputEmail2">账号</label>
+                                                                    <input type="text"  th:value="${account}" name="account" class="form-control" id="exampleInputEmail2" placeholder="账号">--或--
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="sr-only" for="exampleInputPassword2">名字</label>
+                                                                    <input type="text" th:value="${search_name_manager}" name="search_name_manager"  class="form-control" id="exampleInputPassword2" placeholder="名字">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">查询</button>
+                                                            </form>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <table class="table table-striped table-advance table-hover">
+                                                <tbody>
+                                                    <tr>
+                                                        <th><i class="glyphicon glyphicon-user"></i>序号 </th>
+                                                        <th><i class="glyphicon glyphicon-picture"></i>头像 </th>
+                                                        <th><i class="glyphicon glyphicon-user"></i>账号 </th>
+                                                        <th><i class="glyphicon glyphicon-tags"></i> 权限等级</th>
+                                                        <th><i class="glyphicon glyphicon-tags"></i> 名字</th>
+                                                        <th><i class="glyphicon glyphicon-certificate"></i> 登录密码</th>
+                                                        <th><i class="glyphicon glyphicon-heart"></i>性别</th>
+                                                        <th><i class="icon_calendar"></i> 注册日期</th>
+                                                        <th><i class="icon_mobile "></i> 电话</th>
+                                                        <th><i class="icon_pin_alt"></i> 家庭住址</th>
+                                                        <th><i class="icon_cogs" th:if="${session.manager.power} eq 4" ></i> 操作</th>
+                                                    </tr>
+                                                    <tr th:each="m, userStat :${managerinfo}">
+                                                        <td th:text="${userStat.index+1}">序号</td>
+                                                        <td><img
+                                                                class="img-circle"
+                                                                height="100" th:src="'http://localhost:8080/images/upload/'+${m.manager_headpic}" width="100"> </td>
+                                                        <td th:text="${m.manager_account}">账号名称</td>
+                                                        <td th:text="${str[m.power]}">管理权限</td>
+                                                        <td th:text="${m.manager_name}">名字</td>
+                                                        <td th:text="${m.manager_password}">密码</td>
+                                                        <td th:text="${m.manager_sex}==true?'男':'女'">性别</td>
+                                                        <td th:text="${m.manager_date}">注册日期</td>
+                                                        <td th:text="${m.manager_tel}">电话</td>
+                                                        <td th:text="${m.manager_address}">家庭住址</td>
+                                                        <td>
+                                                            <div class="btn-group" th:if="${session.manager.power} eq 4" >
+                                                                <a class="btn btn-primary" th:href="@{'updatem/'+${m.mid}}"  ><i class="glyphicon glyphicon-pencil"></i></a>
+                                                                <a class="btn btn-danger"  th:href="@{'delm/'+${m.mid}}"  ><i class="glyphicon glyphicon-trash"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center">
+                                                <ul class="pagination">
+                                                    <li><a href="#">«</a></li>
+                                                    <li><a href="#">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#">3</a></li>
+                                                    <li><a href="#">4</a></li>
+                                                    <li><a href="#">5</a></li>
+                                                    <li><a href="#">»</a></li>
+                                                </ul>
+                                            </div>
+                                            <div th:if="${session.manager.power} eq 4" >
+                                            <form class="form-inline" method="get" action="/ht/addm">
+                                                <div class="text-right">
+                                                    <button type="submit" class="btn btn-info" >添加新管理员</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--tab nav start-->
+                            </section>
+                        </div>
+                    </div>
+                    <!-- page end-->
+            </section>
+        </section>
+        <!--主页面内容 end-->
+    </section>
+    <!-- container section end -->
+    <!-- javascripts -->
+    <script src="/ht/js/jquery.js"></script>
+    <script src="/ht/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/ht/js/jquery.scrollTo.min.js"></script>
+    <script src="/ht/js/jquery.nicescroll.js" type="text/javascript" ></script>
+    <!--custome script for all page-->
+    <script src="/ht/js/scripts.js"></script>
+</body>
+</html>

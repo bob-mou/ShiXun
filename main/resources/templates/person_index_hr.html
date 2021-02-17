@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>个人信息</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="hr_menu::mymenu3">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="hr_menu::mymenu4">
+        </div>
+    </div>
+</div>
+<!--header-->
+<!--content-->
+<div class="container">
+    <div class="content">
+        <!--contact-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>HR个人信息</h3>
+            </div>
+        </div>
+        <!-- page start-->
+        <div class="content">
+            <!-- page start-->
+            <div class="panel panel-success">
+                <!-- Default panel contents -->
+                <form class="form-horizontal" action="/hr/updateHrMessage" method="post"  enctype="multipart/form-data">
+                    <div class="panel-heading"><h3>个人信息</h3></div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <div  class="col-sm-7">
+                                    <p><img th:src="'http://localhost:8080/images/upload/'+${hr.hr_headpic}" id="imgshow" class="img-thumbnail"  width="290px" height="440px" ></p>
+                                    <input class="form-control" type="file" id="inputfile" name="filepic"  >
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="col-sm-7">
+                        <div class="row">
+                            <div class="form-group">
+                            <label for="user_account" class="col-sm-2 control-label">账号名： </label>
+                            <div class="col-sm-9">
+                                <span id="user_account" th:text="${hr.hr_account}" ></span>
+                                <input  type="hidden" th:value="${hr.hr_account}" name="hr_account" >
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">姓名： </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail3" th:value="${hr.hr_name}" name="hr_name" >
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">登录密码： </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail3" th:value="${hr.hr_password}" name="hr_password" >
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">性别： </label>
+                            <div class="col-sm-9">
+                                <label class="radio-inline">
+                                    <input type="radio" th:checked="${hr.hr_sex}==true?1:0"  name="hr_sex" id="inputPassword3" value="1" >男
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" th:checked="${hr.hr_sex}==true?0:1"  name="hr_sex" id="inputPassword3" value="0">女
+                                </label>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">电话： </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail3" th:value="${hr.hr_tel}" name="hr_tel" >
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">QQ： </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail3" th:value="${hr.hr_qq}" name="hr_qq" >
+                            </div>
+                        </div>
+                            <div class="form-group ">
+                            <label   class="col-sm-2 control-label">简介： </label>
+                            <div class="col-sm-9">
+                                        <textarea class="form-control col-sm-5" rows="6"   th:text="${hr.hr_jl}" name="hr_jl" th:value="${hr.hr_jl}" required>
+                                        &nbsp
+                                        </textarea>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-2">
+                                <button type="submit" class="btn btn-success">信息修改</button>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--content-->
+        </div>
+        <!--content-->
+    </div>
+</div>
+<!---footer--->
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+<script>
+    //在input file内容改变的时候触发事件
+    $('#inputfile').change(function(){
+        //获取input file的files文件数组;
+        //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+        var file = $('#inputfile').get(0).files[0];
+        //创建用来读取此文件的对象
+        var reader = new FileReader();
+        //使用该对象读取file文件
+        reader.readAsDataURL(file);
+        //读取文件成功后执行的方法函数
+        reader.onload=function(e){
+            //读取成功后返回的一个参数e，整个的一个进度事件
+            console.log(e);
+            //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+            //的base64编码格式的地址
+            $('#imgshow').get(0).src = e.target.result;
+        }
+    })
+</script>
+
+</body>
+</html>

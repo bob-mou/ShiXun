@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery.min.js"></script>
+</head>
+<script>
+    function pay() {
+        $.get("[[@{/pay/goPay}]]]",{
+            out_trade_no:$("#out_trade_no"),
+            total_amount:$("#total_amount"),
+            subject:$("#subject"),
+            body:$("#body"),
+        },function (result) {
+            //遍历
+            document.write(result);
+        })
+    }
+</script>
+<body>
+<h1>支付宝电脑网站支付体验入口页</h1>
+    <form action="/pay/goPay" method="post">
+        <p>商户订单号：</p>
+        <input type="text" id="out_trade_no" name="WIDout_trade_no">
+        <p>订单名称 ：</p>
+        <input type="text" id="subject" name="WIDsubject">
+        <p>付款金额：</p>
+        <input type="text" id="total_amount" name="WIDtotal_amount">
+        <p>商品描述：</p>
+        <input type="text" id="body" name="WIDbody">
+        <button class="new-btn-login" type="submit">付 款</button>
+    </form>
+</body>
+</html>

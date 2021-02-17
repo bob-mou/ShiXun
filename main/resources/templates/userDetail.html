@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>个人信息</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="hr_menu::mymenu3">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="hr_menu::mymenu4">
+        </div>
+    </div>
+</div>
+<style>
+    .con {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+</style>
+<!--header-->
+<!--content-->
+<div class="container">
+    <div class="grid_1 grid_1">
+        <h2>VIP Personal Information</h2>
+        <ol class="breadcrumb">
+            <li><a href="/user/hr_index/" >Home</a></li>
+            <li><a href="/hr/youhua/" >处理预约信息</a></li>
+            <li class="active">个人信息</li>
+        </ol>
+    </div>
+    <div class="content">
+             <div class="content">
+            <!-- page start-->
+            <div class="con" id="con" >
+            <div class="panel panel-success">
+                <!-- Default panel contents -->
+                <form class="form-horizontal" >
+                    <div class="row">
+                        <div  class="col-sm-8">
+                        <div class="form-group">
+                            <label for="user_account" class="col-sm-3 control-label">账号名： </label>
+                            <div class="col-sm-9">
+                                <span id="user_account" th:text="${user.user_account}" ></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">姓名： </label>
+                            <div class="col-sm-9">
+                                <span id="user_name" th:text="${user.user_name}" ></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">性别： </label>
+                            <div class="col-sm-9">
+                                <span id="user_sex" th:text="${user.user_sex}==true?'男':'女'" ></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">电话： </label>
+                            <div class="col-sm-9">
+                                <span id="user_tel" th:text="${user.user_tel}" ></span>
+                            </div>
+                        </div>
+                        </div>
+                            <div  class="col-sm-3">
+                                <p><img th:src="'http://localhost:8080/images/upload/'+${user.user_headpic}" id="imgshow" class="img-thumbnail"  width="150px" height="180px" ></p>
+                            </div>
+                    </div>
+                </form>
+            </div>
+            </div>
+            <!--content-->
+        </div>
+        </div>
+        <!--content-->
+    </div>
+</div>
+<!---footer--->
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+</body>
+</html>

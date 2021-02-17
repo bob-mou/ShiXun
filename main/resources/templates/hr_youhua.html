@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HR简历上传</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#inputfile').change(function(){
+                //获取input file的files文件数组;
+
+                //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+                var file = $('#inputfile').get(0).files[0];
+                //创建用来读取此文件的对象
+                var reader = new FileReader();
+                //使用该对象读取file文件
+                reader.readAsDataURL(file);
+                //读取文件成功后执行的方法函数
+                reader.onload=function(e){
+                    //读取成功后返回的一个参数e，整个的一个进度事件
+                    console.log(e);
+                    //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+                    //的base64编码格式的地址
+                    $('#imgshow').get(0).src = e.target.result;
+                }
+            })
+            $('#inputfile1').change(function(){
+                //获取input file的files文件数组;
+
+                //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+                var file = $('#inputfile1').get(0).files[0];
+                //创建用来读取此文件的对象
+                var reader = new FileReader();
+                //使用该对象读取file文件
+                reader.readAsDataURL(file);
+                //读取文件成功后执行的方法函数
+                reader.onload=function(e){
+                    //读取成功后返回的一个参数e，整个的一个进度事件
+                    console.log(e);
+                    //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+                    //的base64编码格式的地址
+                    $('#imgshow1').get(0).src = e.target.result;
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="hr_menu::mymenu3">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="hr_menu::mymenu4">
+
+        </div>
+    </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa fa-bars"></i>处理预约信息</h3>
+    </div>
+</div>
+<!--content-->
+<div class="container">
+    <div class="content">
+        <div class="bs-docs-example">
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>预约时间</th>
+                    <th>姓名</th>
+                    <th style="width: 90px;">面试职业</th>
+                    <th>修改留言</th>
+                    <th>用户信息</th>
+                    <th style="width: 90px;"  >查看文档</th>
+                    <th>上传优化文档</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="u,start:${subscribeInfo}">
+                    <td th:text="${start.index+1}"></td>
+                    <td th:text="${u.subscribe_date}"></td>
+                    <td th:text="${u.user_name}"></td>
+                    <td th:text="${u.vocation_name}"></td>
+                    <td th:text="${u.userAndMessage}"></td>
+                    <td >
+                        <a th:href="@{'/hr/userdetail/'+${u.user_id}}" >查看</a></p>
+                    </td>
+                    <td >
+                        <a  th:href="@{/hr/download_hr(resume_download_address=${u.resume_download_address},subscribe_id=${u.subscribe_id})}">下载文档</a></p>
+                    </td>
+                    <td >
+                        <div class="row">
+                            <form class="form-inline" method="post" action="/hr/uploadNewRe/"  enctype="multipart/form-data">
+                                <div  style="display: flex;justify-content: space-around;padding-left: 10px;" >
+                                    <input class="form-control" type="file" id="inputfile1" name="file" style="height: 36px;display:flex;text-align: center;"/>
+                                    <input type="hidden" name="subscribe_id"  th:value="${u.subscribe_id}" style="display: flex;align-items: center"/>
+                                    <button type="submit" class="btn-success"  style="width: 60px;height: 36px;">上传</button>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <form class="form-inline" method="get" action="/hr/todealwith/" >
+                            <div class="text-right">
+                                <input type="hidden" name="isdealwith"  th:value="${u.isdealwith}">
+                                <button style="width: 90px" type="submit" class="btn btn-info" th:value="${u.subscribe_id}" name="subscribe_id" th:text="${str[u.isdealwith]}">已处理</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<!--content-->
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+</body>
+</html>

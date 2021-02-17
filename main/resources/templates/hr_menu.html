@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>前端顶部菜单</title>
+</head>
+<body>
+<!-- 最顶端 -->
+<div class="header-top" th:fragment="mymenu3">
+    <div class="container">
+        <div class="top-left">
+            <a href="#"> 咨询热线 <i class="glyphicon glyphicon-phone" aria-hidden="true"></i> +134-3456-7389</a>
+        </div>
+        <div class="top-right">
+            <ul>
+                <li><a href="/user/login1">登录</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- 导航栏 -->
+<div class="heder-bottom" th:fragment="mymenu4">
+    <div class="container">
+        <div class="logo-nav">
+            <div class="logo-nav-left">
+                <h1><a >Find Job <span>Gas station</span></a></h1>
+            </div>
+            <div class="logo-nav-left1">
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header nav_2">
+                        <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
+                                data-target="#bs-megadropdown-tabs">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/user/hr_index" class="act">HR简历管理</a></li>
+                            <!-- Mega Menu -->
+                            <li><a href="/user/hr_load">简历上传</a></li>
+                            <li><a href="/hr/youhua">简历优化预约信息</a></li>
+                            <li><a href="/hr/hrDetail">我的信息</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 底部部分 -->
+<div class="container" th:fragment="mymenu2">
+    <div class="footer-grids">
+        <div class="col-md-3 footer-grid">
+            <h4>关于</h4>
+            <p>求职加油站致力于为广大求职者提供优质的简历模板，简历优化，简历定制等服务</p>
+            <div class="social-icon">
+                <a href="#"><i class="icon"></i></a>
+                <a href="#"><i class="icon1"></i></a>
+                <a href="#"><i class="icon2"></i></a>
+                <a href="#"><i class="icon3"></i></a>
+            </div>
+        </div>
+        <div class="col-md-3 footer-grid">
+            <h4>我的账号</h4>
+            <ul>
+                <li><a href="checkout.html">订单</a></li>
+                <li><a href="/user/login">登录</a></li>
+                <li><a href="/user/registered">注册 </a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 footer-grid">
+            <h4>菜单栏</h4>
+            <ul>
+                <li><a href="/user/all">首页</a></li>
+                <li><a href="/user/busy">商务模板</a></li>
+                <li><a href="/user/char">个性模板</a></li>
+                <li><a href="/user/optimize">简历优化</a></li>
+                <li><a href="/user/mail">简历定制</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 footer-grid foot">
+            <h4>联系</h4>
+            <ul>
+                <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i><a href="#">求职加油站,武汉,湖北</a></li>
+                <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i><a href="#">+134-3456-7389</a>
+                </li>
+                <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a
+                        href="mailto:example@mail.com"> example@mail.com</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+</body>
+</html>

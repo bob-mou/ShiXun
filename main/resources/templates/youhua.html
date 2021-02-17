@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>商务模板</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="qd_menu::mymenu1">
+        </div>
+    </div>
+</div>
+<!--header-->
+<!--主页面-->
+<style>
+    .con {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 3%;
+    }
+</style>
+<div class="container" >
+    <div class="grid_1 grid_1">
+        <h2>Resume Optimization</h2>
+        <ol class="breadcrumb">
+            <li><a href="#" class="">主页</a></li>
+            <li><a href="#" class="">HR推荐</a></li>
+            <li class="active">定制与优化</li>
+        </ol>
+    </div>
+    <!--页面居中-->
+    <div class="con" id="con"  >
+        <div class="row">
+    <div class="col-lg-6">
+        <table class="table ">
+            <tr>
+                <td style="font-size: 13pX" th:text="'姓名：  '+${hr.hr_name}"> </td>
+            </tr>
+            <tr>
+                <td style="font-size: 13pX" th:text="'账号名：  '+${hr.hr_account}"> </td>
+            </tr>
+            <tr>
+                <td style="font-size: 13pX" th:text="${hr.hr_sex}==true?'性别：  男':'性别：  女'"> </td>
+            </tr>
+<!--            <tr>-->
+<!--                <td style="font-size: 13pX"  th:text="'电话：  '+${hr.hr_tel}"> </td>-->
+<!--            </tr>-->
+            <tr>
+                <td style="font-size: 13pX" th:text="'简介：  '+${hr.hr_jl}"> </td>
+            </tr>
+        </table>
+    </div>
+            <div class="col-lg-6">
+                <img
+                    height="240" th:src="'http://localhost:8080/images/upload/'+${hr.hr_headpic}" width="175">
+            </div>
+    </div>
+    <tr>
+    <form action="/user/youhua" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-12">
+                请上传你想要咨询的简历
+                <div class="row">
+                    <div class="col-xs-8 col-sm-8">
+                        <div class="key">
+                            <input class="form-control" type="hidden"  th:value="${hr.hid}" name="hr_id">
+                            <input class="form-control" type="file" id="inputfile1" name="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <select name="vocation_id" class="form-control">
+                    <option>---请选择对应的行业---</option>
+                    <option th:each="v :${vocationinfo}" th:value="${v.vocation_id}" th:text="${v.vocation_name}">xg</option>
+                </select>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div>
+            <br>
+            <h5><p>备注</p></h5>
+            <div class="row">
+            <div class="col-xs-8 col-sm-8">
+                <textarea  name="userAndMessage" cols="5" class="form-control" rows="3"></textarea>
+             </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <input type="submit"  style="width: 120px;height: 29px" class="btn-success" value="预约">
+    </form>
+    </div>
+</div>
+<!--主页面-->
+<!---footer--->
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+</body>
+</html>

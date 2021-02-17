@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:fmt="http://www.w3.org/1999/xhtml">
+<head>
+    <title>求职加油站留言栏</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+
+    <!--search jQuery-->
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <script>
+        $(function () {
+            //评分
+            var starRating = 0;
+            $('.photo span').on('mouseenter',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                $(this).nextAll().find('.high').css('z-index',0)
+                $('.starNum').html((index*2).toFixed(1)+'分')
+            })
+            $('.photo').on('mouseleave',function () {
+                $(this).find('.high').css('z-index',0)
+                var count = starRating / 2
+                if(count == 5) {
+                    $('.photo span').find('.high').css('z-index',1);
+                } else {
+                    $('.photo span').eq(count).prevAll().find('.high').css('z-index',1);
+                }
+                $('.starNum').html(starRating.toFixed(1)+'分')
+            })
+            $('.photo span').on('click',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                starRating = index*2;
+                console.log(starRating);
+                $('.starNum').html(starRating.toFixed(1)+'分');
+                document.getElementById("starNum").value=starRating;
+                // alert('评分：'+(starRating.toFixed(1)+'分'))
+            })
+            //取消评分
+            $('.cancleStar').on('click',function () {
+                starRating = 0;
+                $('.photo span').find('.high').css('z-index',0);
+                $('.starNum').html(starRating.toFixed(1)+'分');
+            })
+            //确定评分
+            $('.sureStar').on('click',function () {
+                if(starRating===0) {
+                    alert('最低一颗星！');
+                } else {
+                    alert('评分：'+(starRating.toFixed(1)+'分'))
+                }
+            })
+        })
+    </script>
+    <!-- cart -->
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="qd_menu::mymenu1">
+        </div>
+    </div>
+</div>
+<div class="content">
+        <div class="container">
+            <div class="grid_1 grid_1">
+                <h2>Message Board</h2>
+                <ol class="breadcrumb">
+                    <li><a href="/user/all" class="">首页</a></li>
+                    <li class="active">留言板</li>
+                </ol>
+            </div>
+            <div th:each="liuyan :${liuY.list}">
+                 <div class="row">
+                <div style="border: black 1px;background-color: RGB(245,245,245);margin: 2% 7%;padding: 7px;" >
+                    <div class="row" >
+                        <div th:text="${liuyan.name}+' : '"  style="margin-bottom: 3px;font-size: 21px;color: #0d59af" class="col-sm-10">
+                        </div>
+                        <div style="font-size: 11px" fmt:formatDate  th:text="${liuyan.date}" pattern="yyyy-MM-dd HH:mm:ss" >
+                        </div>
+                    </div>
+                    <div th:text="${liuyan.remark}" style="font-family: 幼圆;font-size: 17px;">
+                    </div>
+                    <div th:if="${liuyan.mood} ne null" th:text="'Mood ：  '+${liuyan.mood}" style="text-align: right">
+                    </div>
+                </div>
+            </div>
+            </div>
+            <center>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a th:href="@{/user/liuy(pageIndex=${liuY.pageNum-1},pageSize=11,account=${account})}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <th:block th:each="nav:${liuY.navigatepageNums}">
+                            <li th:class="${nav==liuY.pageNum}==true?'active':''">
+                                <a th:href="@{/user/liuy(pageIndex=${nav},pageSize=10)}" th:text="${nav}" ></a>
+                            </li>
+                        </th:block>
+                        <li>
+                            <a th:href="@{/user/liuy(pageIndex=${liuY.pageNum+1},pageSize=10)}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </center>
+            <div class="mail-grids">
+                <div class="mail-bottom" style="margin-bottom: 30px">
+                    <h4>记录您的美好一刻！</h4>
+                    <form action="/user/liuy2" method="post">
+                        <input type="text" name="name" placeholder="姓名" style="width: 49%;margin-right: 2%">
+                        <input type="text" name="mood"  placeholder="心情" style="width: 49%">
+                        <textarea  name="remark" required >留言...</textarea>
+                        <input type="submit" value="Submit" >
+                        <input type="reset" value="Clear" >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--contact-->
+<!--content-->
+<!---footer--->
+<div class="footer-w3l"   style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+<!--copy-->
+
+<!--copy-->
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/ht/img/favicon.png">
+
+    <title>Blank | 求职加油站后台管理系统</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/ht/css/bootstrap.css" rel="stylesheet">
+    <link href="/ht/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/ht/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/ht/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/ht/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/ht/css/style.css" rel="stylesheet">
+    <link href="/ht/css/style-responsive.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="/ht/js/html5shiv.js"></script>
+    <script src="/ht/js/respond.min.js"></script>
+    <script src="/ht/js/lte-ie7.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- container section start -->
+<section id="container" class="">
+    <div th:replace="menu::myheader">
+    </div>
+    <!--左边菜单栏 start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse " th:replace="menu::myaside">
+        </div>
+    </aside>
+    <!--左边菜单栏 end-->
+
+    <!--主页面内容 start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa fa-bars"></i> 行业信息管理</h3>
+                </div>
+            </div>
+            <!-- page start-->
+
+                <header class="panel-heading">
+                    <form class="form-inline" method="get" action="/vocation/addv">
+                        <div class="text-left">
+                            行业类型档案表
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-info" >添加新行业类型</button>
+                        </div>
+                    </form>
+                </header>
+                <table class="table table-striped table-advance table-hover" style="margin-bottom: 5px">
+                    <tbody>
+                    <tr>
+                        <th><i class="icon_star"></i> 序号</th>
+                        <th><i class="icon_book"></i> 行业类型名称</th>
+                        <th><i class="icon_pencil"></i> 修改</th>
+                        <th><i class="icon_trash"></i> 删除</th>
+                    </tr>
+                    <tr th:each="v,userStat :${vocationinfo.list}">
+                        <td th:text="${userStat.index+1}">序号</td>
+                        <td th:text="${v.vocation_name}">行业类型名称</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-primary" th:href="@{'updatev/'+${v.vocation_id}}" ><i class="glyphicon glyphicon-pencil"></i></a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-danger"  th:href="@{'delv/'+${v.vocation_id}}" ><i class="glyphicon glyphicon-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            <div style="text-align: center;">
+                <nav aria-label="Page navigation" style="margin-top: 5px">
+                    <ul class="pagination">
+                        <li>
+                            <a th:href="@{/vocation/index(pageIndex=${vocationinfo.pageNum-1},pageSize=8)}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <th:block th:each="nav:${vocationinfo.navigatepageNums}">
+                            <li th:class="${nav==vocationinfo.pageNum}==true?'active':''">
+                                <a th:href="@{/vocation/index(pageIndex=${nav},pageSize=8)}" th:text="${nav}" ></a>
+                            </li>
+                        </th:block>
+                        <li>
+                            <a th:href="@{/vocation/index(pageIndex=${vocationinfo.pageNum+1},pageSize=8)}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+    <!--主页面内容 end-->
+
+</section>
+<!-- container section end -->
+<!-- javascripts -->
+<script src="/ht/js/jquery.js"></script>
+<script src="/ht/js/bootstrap.min.js"></script>
+<!-- nice scroll -->
+<script src="/ht/js/jquery.scrollTo.min.js"></script>
+<script src="/ht/js/jquery.nicescroll.js" type="text/javascript" ></script>
+<!--custome script for all page-->
+<script src="/ht/js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>登录 </title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+
+</head>
+<body>
+<!--header-->
+
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="qd_menu::mymenu1">
+
+        </div>
+    </div>
+</div>
+
+<!--header-->
+<div class="container">
+<div class="grid_1 grid_1">
+    <ol class="breadcrumb">
+        <li><a href="/user/all" class="">首页</a></li>
+        <li class="active">登录</li>
+    </ol>
+</div>
+<!--content-->
+    <!--login-->
+<div class="content">
+    <div class="login">
+        <div class="main-agileits">
+            <div class="form-w3agile">
+                <h3>欢迎登录</h3>
+                <form action="/user/login" method="post">
+                    <div class="key">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <input type="text" name="account" class="form-control" placeholder="账号" autofocus>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="key">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <input type="password" name="password" class="form-control" placeholder="password" autofocus>
+                        <div class="clearfix"></div>
+                    </div>
+                    <label class="radio-inline">
+                        <input type="radio" name="power" id="power1" value="1"> 用户
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="power" id="power2" value="2"> HR
+                    </label>
+                    <br>
+                    <br>
+                    <input type="submit" value="登录">
+                </form>
+            </div>
+            <div class="forg">
+                <a href="/hr/addhr1" class="forg-left">HR注册</a>
+                <a href="/user/registered" class="forg-right">用户注册</a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--login-->
+
+</div>
+<!--content-->
+</div>
+<!-- -footer- -->
+
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+
+</body>
+</html>

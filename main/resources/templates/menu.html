@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/ht/img/favicon.png">
+    <title>Blank | 求职加油站后台管理系统</title>
+    <!-- Bootstrap CSS -->
+    <link href="/ht/css/bootstrap.css" rel="stylesheet">
+    <link href="/ht/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/ht/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/ht/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/ht/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/ht/css/style.css" rel="stylesheet">
+    <link href="/ht/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="/ht/js/html5shiv.js"></script>
+      <script src="/ht/js/respond.min.js"></script>
+      <script src="/ht/js/lte-ie7.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- container section start -->
+    <section id="container">
+        <div th:fragment="myheader">
+        <header class="header dark-bg" >
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+            </div>
+            <!--logo start-->
+            <a href="/ht/statistics_main" class="logo">求职加油站 <span class="lite">后台管理系统</span></a>
+            <!--logo end-->
+            <div class="top-nav notification-row" >
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    <!-- inbox notificatoin start-->
+                    <li id="mail_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-envelope-l"></i>
+                            <span class="badge bg-important" th:text="${session.countAll}"></span>
+                        </a>
+                        <ul class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-blue"></div>
+                            <li>
+                                <p class="blue" th:text="'你有'+${session.countAll}+'条信息需要处理'"></p>
+                            </li>
+                            <li th:if="${session.countDealWith} gt 0" >
+                                <a href="/ht/manage_file"  th:text="'你有'+${session.countDealWith}+'条HR待审核'"></a>
+                            </li>
+                            <li th:if="${session.countResume} gt 0" >
+                                <a href="/publishList/index" th:text="'你有'+${session.countResume}+'个模板审批'" > </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- inbox notificatoin end -->
+                    <!-- 管理者登录下拉菜单 start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" th:src="'http://localhost:8080/images/upload/'+${session.manager.manager_headpic}" width="45" height="45">
+                            </span>
+                            <span class="username" th:text="${session.manager.manager_name}"></span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li>
+                                <a href="/ht/loginOut"><i class="icon_profile"></i>退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 管理者登录下拉菜单 end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+        </header>
+        </div>
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse " th:fragment="myaside">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu">
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_piechart"></i>
+                            <span>模板统计</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                           <li>
+                                <a class="" href="/ht/index">数据统计主页面</a>
+                            </li>
+                        </ul>
+                </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>简历模板管理</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>
+                                <a class="" href="/publishList/index">模板发布管理</a>
+                            </li>
+                            <li>
+                                <a class="" href="/subscribe/index">简历定制管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="" href="/ht/manage_file">
+                            <i class="icon_piechart"></i>
+                            <span>人员档案管理</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>其他档案管理</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>
+                                <a class=""href="/vocation/index">行业信息管理</a>
+                            </li>
+                            <li>
+                                <a class="active" href="/pinfen/index">评分信息管理</a>
+                            </li>
+                            <li>
+                                <a class="" href="/flw/index">订单信息管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="" href="/log/login_log">
+                            <i class="icon_piechart"></i>
+                            <span>登录日志</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--主页面内容 start-->
+
+        <!--主页面内容 end-->
+    </section>
+    <!-- container section end -->
+    <!-- javascripts -->
+    <script src="/ht/js/jquery.js"></script>
+    <script src="/ht/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/ht/js/jquery.scrollTo.min.js"></script>
+    <script src="/ht/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--custome script for all page-->
+    <script src="/ht/js/scripts.js"></script>
+</body>
+</html>

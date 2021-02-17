@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>商务模板</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="js/main.js"></script>
+    <!--search jQuery-->
+    <script src="/js/responsiveslides.min.js"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+
+        //定时更新
+        $(function () {
+              setInterval(function () {
+                    $.get("[[@{/user/findAllJSON}]]",function (res) {
+                        //遍历
+                        $.each(res,function (index,ResumeInfo) {
+                            $("#"+ResumeInfo.rid).text(ResumeInfo.resume_times);
+                        })
+                    });
+                },3000);
+            });
+    </script>
+    <script>
+        $(function () {
+            //评分
+            var starRating = 0;
+            $('.photo span').on('mouseenter',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                $(this).nextAll().find('.high').css('z-index',0)
+                $('.starNum').html((index*2).toFixed(1)+'分')
+            })
+            $('.photo').on('mouseleave',function () {
+                $(this).find('.high').css('z-index',0)
+                var count = starRating / 2
+                if(count == 5) {
+                    $('.photo span').find('.high').css('z-index',1);
+                } else {
+                    $('.photo span').eq(count).prevAll().find('.high').css('z-index',1);
+                }
+                $('.starNum').html(starRating.toFixed(1)+'分')
+            })
+            $('.photo span').on('click',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                starRating = index*2;
+                console.log(starRating);
+                $('.starNum').html(starRating.toFixed(1)+'分');
+                 document.getElementById("starNum").value=starRating;
+                // alert('评分：'+(starRating.toFixed(1)+'分'))
+            })
+            //取消评分
+            $('.cancleStar').on('click',function () {
+                starRating = 0;
+                $('.photo span').find('.high').css('z-index',0);
+                $('.starNum').html(starRating.toFixed(1)+'分');
+            })
+            //确定评分
+            $('.sureStar').on('click',function () {
+                if(starRating===0) {
+                    alert('最低一颗星！');
+                } else {
+                    alert('评分：'+(starRating.toFixed(1)+'分'))
+                }
+            })
+        })
+    </script>
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+    <!-- 下载 -->
+    <!-- Button trigger modal -->
+    <link rel="stylesheet" href="/css/css.css">
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="qd_menu::mymenu1">
+        </div>
+    </div>
+</div>
+<!--header-->
+<!--主页面-->
+<div class="container">
+    <!-- Modal -->
+    <div class="grid_1 grid_1">
+        <h2>Download AllFree</h2>
+        <ol class="breadcrumb">
+            <li><a href="#" class="">首页</a></li>
+            <li><a href="#" class="">商务模板</a></li>
+            <li class="active">模板详情</li>
+        </ol>
+    </div>
+    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav1 nav1-tabs left-tab" role="tablist">
+            <div id="myTabContent" class="tab-content">
+                <div class="col-md-8 product-tab-grid simpleCart_shelfItem">
+                    <div class="grid-arr">
+                        <div class="grid-arrival">
+                            <figure>
+                                <a href="#" class="new-gri" data-toggle="modal" data-target="#myModal1">
+                                    <div class="grid-img">
+                                        <img th:src="'http://localhost:8080'+${ResumeInfo.resume_download_address}+'/'+${ResumeInfo.download_mini_address}" class="img-responsive" alt="">
+                                    </div>
+                                </a>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 product-tab-grid simpleCart_shelfItem">
+                    <div class="grid-arr">
+                        <div class="grid-arrival">
+                            <figure>
+                                <a href="#" class="new-gri" data-toggle="modal" data-target="#myModal1">
+                                    <div class="grid-img">
+                                    </div>
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="block">
+                            <div class="starbox small ghosting"></div>
+                        </div>
+                        <div class="women">
+                            <h2><a  th:text="'简介：'+${ResumeInfo.remark}">简介</a></h2>
+                            <span class="size" th:text="'上传于：'+${ResumeInfo.resume_up_date}">上传日期</span>
+                            <p>
+                                <h5>下载量</h5>
+                            <h3><a class="item_price" th:id="${ResumeInfo.rid}" th:text="${ResumeInfo.resume_times}">下载次数</a></h3></p>
+                            <H1>
+                                <a th:href="@{/hr/download(id=${ResumeInfo.rid})}" ><button class="btn btn-success"  type="button">下载</button></a>
+                            </H1>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </ul>
+    </div>
+</div>
+<!--主页面-->
+<!---footer--->
+<div class="footer-w3l">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+<!--copy-->
+
+<!--copy-->
+</body>
+</html>

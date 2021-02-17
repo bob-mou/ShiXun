@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HR简历上传</title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#inputfile').change(function(){
+                //获取input file的files文件数组;
+
+                //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+                var file = $('#inputfile').get(0).files[0];
+                //创建用来读取此文件的对象
+                var reader = new FileReader();
+                //使用该对象读取file文件
+                reader.readAsDataURL(file);
+                //读取文件成功后执行的方法函数
+                reader.onload=function(e){
+                    //读取成功后返回的一个参数e，整个的一个进度事件
+                    console.log(e);
+                    //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+                    //的base64编码格式的地址
+                    $('#imgshow').get(0).src = e.target.result;
+                }
+            })
+            $('#inputfile1').change(function(){
+                //获取input file的files文件数组;
+
+                //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+                var file = $('#inputfile1').get(0).files[0];
+                //创建用来读取此文件的对象
+                var reader = new FileReader();
+                //使用该对象读取file文件
+                reader.readAsDataURL(file);
+                //读取文件成功后执行的方法函数
+                reader.onload=function(e){
+                    //读取成功后返回的一个参数e，整个的一个进度事件
+                    console.log(e);
+                    //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+                    //的base64编码格式的地址
+                    $('#imgshow1').get(0).src = e.target.result;
+                }
+            })
+            });
+    </script>
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="hr_menu::mymenu3">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="hr_menu::mymenu4">
+        </div>
+    </div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa fa-bars"></i>HR简历上传</h3>
+    </div>
+</div>
+<div class="content">
+    <div class="registered" style="width: 70%;alignment: center; margin-left: 15%;">
+        <div class="main-agileits" style="width: 70%;alignment: center; margin-left: 10%;">
+            <div class="form-w3agile form1" style="width: 70%;alignment: center; margin-left: 15%;">
+                <h3>欢迎HR上传简历</h3>
+                <form action="/hr/resume_up" method="post" enctype="multipart/form-data">
+                    <div class="key">
+                        <i class="fa fa-desktop" aria-hidden="true" ></i>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <select name="vocation_id" class="form-control">
+                                    <option>---请选择对应的行业---</option>
+                                    <option th:each="v :${vocationinfo}" th:value="${v.vocation_id}" th:text="${v.vocation_name}">xg</option>
+                                 </select>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            上传简历模板
+                            <div class="row">
+                                <div class="col-xs-8 col-sm-10">
+                                    <div class="key">
+                                        <h5><p>请上传简历模板缩略图</p></h5>
+                                        <p><img src="/images/shangChuanTuPian.jpg" id="imgshow" class="img-thumbnail" width="100px" height="100px"></p>
+                                        <input class="form-control" type="file" id="inputfile" name="download">
+                                    </div>
+                                </div>
+                                <div class="col-xs-8 col-sm-10">
+                                    <div class="key">
+                                        <h5><p>请上传简历模板</p></h5>
+                                        <input class="form-control" type="file" id="inputfile1" name="file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h5><p>备注</p></h5>
+                        <textarea  name="remark" class="form-control" rows="3"></textarea>
+                    </div>
+                    <br>
+                    <br>
+                    <p><input type="submit" value="上传"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--login-->
+</div>
+</div>
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+</body>
+</html>

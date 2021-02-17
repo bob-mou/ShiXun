@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="/ht/img/favicon.png">
+
+    <title>Blank | 求职加油站后台管理系统</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/ht/css/bootstrap.css" rel="stylesheet">
+    <link href="/ht/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/ht/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/ht/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/ht/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/ht/css/style.css" rel="stylesheet">
+    <link href="/ht/css/style-responsive.css" rel="stylesheet" />
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="/ht/js/html5shiv.js"></script>
+    <script src="/ht/js/respond.min.js"></script>
+    <script src="/ht/js/lte-ie7.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<style>
+    .con {
+        margin-left: 0%;
+        margin-right: 15%;
+    }
+</style>
+<!-- container section start -->
+<section id="container" class="">
+    <div th:replace="menu::myheader">
+    </div>
+    <!--左边菜单栏 start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse " th:replace="menu::myaside">
+        </div>
+    </aside>
+    <!--左边菜单栏 end-->
+
+    <!--主页面内容 start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa fa-bars"></i> HR信息审核</h3>
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="#">主页面</a></li>
+                        <li><i class="fa fa-bars"></i>审核HR</li>
+                    </ol>
+                </div>
+            </div>
+        <div class="con">
+            <div class="col-lg-12">
+                <table class="table ">
+                    <tr>
+                        <td th:text="'注册日期： '+${hr.register_date}"></td>
+                    </tr><tr>
+                        <td th:text="'账号： '+${hr.hr_account}"></td>
+                    </tr><tr>
+                    <td th:text="'名字： '+${hr.hr_name}"></td>
+                    </tr><tr>
+                    <td th:text="${hr.hr_sex}==true?'性别： 男':'性别： 女'"> </td>
+                    </tr><tr>
+                    <td th:text="'电话： '+${hr.hr_tel}"> </td>
+                    </tr><tr>
+                    <td th:text="'QQ： '+${hr.hr_qq}"> </td>
+                    </tr><tr>
+                    <td th:text="${hr.isHr}==true?'是否为会员： 是HR':'是否为会员： 非HR'"> </td>
+                    </tr><tr>
+                            <td th:text="'简介： '+${hr.hr_jl}">&nbsp</td>
+                    </tr>
+                </table>
+            </div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <div class="form">
+                                        <div class="form-group ">
+                                            <label class="control-label col-lg-3">材料1：</label>
+                                            <div class="col-lg-4">
+                                                <img
+                                                        class="img-rounded"
+                                                        height="470" th:src="'http://localhost:8080/hr_file/'+${hr.hr_headpic1}" width="317">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-lg-5">
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <div class="form">
+                                        <div class="form-group ">
+                                            <label class="control-label col-lg-3">材料2：</label>
+                                            <div class="col-lg-4">
+                                                <img
+                                                        class="img-rounded"
+                                                        height="470" th:src="'http://localhost:8080/hr_file/'+${hr.hr_headpic2}" width="317">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="panel-body">
+                                <div class="form">
+                                    <form class="form-validate form-horizontal" id="feedback_form" method="post" action="/ht/check">
+                                        <input type="hidden" th:value="${hr.hid}" name="hid">
+                                        <div class="form-group ">
+                                            <label   class="control-label col-lg-3">是否通过审核</label>
+                                            <div class="col-lg-7">
+                                                <label class="btn ">
+                                                    <input type="radio"  th:checked="${hr.isHr}==true?'false':'true'"    value="0" name="isHr" required>不通过
+                                                </label>
+                                                <label class="btn ">
+                                                    <input type="radio"  th:checked="${hr.isHr}==true?'true':'false'"  value="1" name="isHr">通过
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label   class="control-label col-lg-3">审批意见</label>
+                                            <div class="col-lg-7">
+                                                <textarea class="form-control col-lg-4" rows="6" name="message" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-6">
+                                                <button class="btn btn-primary" type="submit">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+                </section>
+            </section>
+    <!--主页面内容 end-->
+
+</section>
+<!-- container section end -->
+<!-- javascripts -->
+<script src="/ht/js/jquery.js"></script>
+<script src="/ht/js/bootstrap.min.js"></script>
+<!-- nice scroll -->
+<script src="/ht/js/jquery.scrollTo.min.js"></script>
+<script src="/ht/js/jquery.nicescroll.js" type="text/javascript"></script>
+<!--custome script for all page-->
+<script src="/ht/js/scripts.js"></script>
+</body>
+
+</html>

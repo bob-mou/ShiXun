@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>注册 </title>
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="/js/main.js"></script>
+    <!--search jQuery-->
+
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+</head>
+<body>
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="qd_menu::mymenu1">
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="grid_1 grid_1">
+        <ol class="breadcrumb">
+            <li><a href="/user/all" class="">首页</a></li>
+            <li class="active">用户注册</li>
+        </ol>
+    </div>
+<!--banner-->
+
+<!--content-->
+<div class="content">
+    <!--registered-->
+    <div class="registered">
+        <div class="main-agileits">
+            <div class="form-w3agile form1">
+                <h3>欢迎用户注册</h3>
+                <style>
+
+                    input {
+                        margin-right: 20px;
+                    }
+
+                    .red {
+                        color: red;
+                    }
+                </style>
+                <form action="/user/regi" method="post" >
+                    <p>
+                        <label for="user_name">姓名：</label>
+                        <input type="text" id="user_name"  name="user_name" onblur="nameCheck()">
+                        <span class="user_name">请输入2~10位中文</span>
+                    </p>
+                    <br>
+                    <p>
+                        <label for="user_account">账号：</label>
+                        <input type="text" id="user_account" name="user_account" >
+                        <span class="user_account">请输入4-15位字母或数字组合</span>
+                    </p>
+                    <br>
+                    <p>
+                        <label >性别：</label>
+                        <i class="fa fa-male" aria-hidden="true"></i>
+                        <label class="radio-inline">
+                            <input type="radio" name="user_sex" id="inlineRadio1" value="1"> 男
+                        </label>
+                        &nbsp  &nbsp  &nbsp
+                        <i class="fa fa-female" aria-hidden="true"></i>
+                        <label class="radio-inline">
+                            <input type="radio" name="user_sex" id="inlineRadio2" value="0"> 女
+                        </label>
+                    </p>
+                    <br>
+                    <p>
+                        <label for="user_tel">电话：</label>
+                        <input type="text" id="user_tel"  name="user_tel" onblur="telCheck()">
+                        <span class="user_tel">11位数字组成</span>
+                    </p>
+                    <br>
+                    <p>
+                        <label for="user_password">密码：</label>
+                        <input type="password" id="user_password" name="user_password" onblur="passwordCheck()">
+                        <span class="user_password">请输入6-12位密码</span>
+                    </p>
+                    <br>
+                    <br>
+                    <input onclick="sub()" type="submit" value="注册">
+                    <br>
+                    <br>
+                    <div class="forg">
+                        <a href="/user/login1" class="forg-left">登录</a>
+                        <a href="/hr/addhr1" class="forg-right">HR注册</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--login-->
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+    function sub(){
+        //全部输入正确返回成功   输入错误则提示输出错误
+        if(nameCheck()&&telCheck()&&passwordCheck()) {alert('提交成功');
+        }else{
+            alert('你的输入有误，请按要求输入后再提交');
+        }
+    }
+    //验证姓名字段
+    function nameCheck(){
+        let reg = /^[\u4e00-\u9fa5]{2,10}$/;
+        let user_name = $("#user_name").val();
+        if (!reg.test(user_name) || user_name=='') {
+            $(".user_name").html("<span class='red'>请输入2~10位中文</span>");
+            return false;
+        }else{
+            $(".user_name").text('√');
+            return true;
+        }
+    }
+    //验证账号字段
+    //function accountCheck(){
+    // let reg = /^[a-zA-Z0-9]{4,15}$/;
+    //  let user_account = $("#user_account").val();
+    // if (!reg.test(user_account) || user_account=='') {
+    //   $(".user_account").html("<span class='red'>请输入4-15位字母或数字组合</span>");
+    //     return false;
+    // }else{
+    //      $(".user_account").text('√');
+    //      return true;
+    //  }
+    // }
+    //验证电话
+    function telCheck() {
+        let reg = /^\d{11}$/;
+        let user_tel = $("#user_tel").val();
+        if(!reg.test(user_tel) || user_tel==''){
+            $(".user_tel").html("<span class='red'>请输入11位电话号码</span>")
+            return false;
+        }else{
+            $(".user_tel").text('√');
+            return true;
+        }
+    }
+    //验证密码字段
+    function passwordCheck(){
+        let reg = /^[\s\S]{6,12}/;
+        let user_password = $("#user_password").val();
+        if(!reg.test(user_password) || user_password==''){
+            $(".user_password").html("<span class='red'>请输入6-12位密码</span>");
+            return false;
+        }else{
+            $(".user_password").text('√');
+            return true;
+        }
+    }
+
+</script>
+<script>
+    //获取文本值
+    var accountInput = document.getElementById("user_account");
+    //当文本框离开焦点后
+    accountInput.onblur = function () {
+        //获取account的值
+        var account = accountInput.value;
+        var reg = /^[a-zA-Z0-9]{4,15}$/;
+        //如果Hr输入的账号不符合规则
+        if (!reg.test(account)) {
+            //给出Hr提示
+            alert("请输入合法账号!");
+            //阻止程序向下
+            return;
+        }
+    }
+</script>
+<!--content-->
+<!---footer--->
+</div>
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+<!--copy-->
+</body>
+</html>

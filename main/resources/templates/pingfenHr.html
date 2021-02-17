@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>HR服务评分</title>
+    <!--css-->
+    <!--css-->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!--css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="New Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <script src="/js/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Cagliostro' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300'
+          rel='stylesheet' type='text/css'>
+    <!--search jQuery-->
+    <script src="js/main.js"></script>
+    <!--search jQuery-->
+    <script src="/js/responsiveslides.min.js"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+        //定时更新
+        $(function () {
+            setInterval(function () {
+                $.get("[[@{/user/findAllJSON}]]",function (res) {
+                    //遍历
+                    $.each(res,function (index,ResumeInfo) {
+                        $("#"+ResumeInfo.rid).text(ResumeInfo.resume_times);
+                    })
+                });
+            },3000);
+        });
+    </script>
+    <script>
+        $(function () {
+            //评分
+            var starRating = 0;
+            $('.photo span').on('mouseenter',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                $(this).nextAll().find('.high').css('z-index',0)
+                $('.starNum').html((index*2).toFixed(1)+'分')
+            })
+            $('.photo').on('mouseleave',function () {
+                $(this).find('.high').css('z-index',0)
+                var count = starRating / 2
+                if(count == 5) {
+                    $('.photo span').find('.high').css('z-index',1);
+                } else {
+                    $('.photo span').eq(count).prevAll().find('.high').css('z-index',1);
+                }
+                $('.starNum').html(starRating.toFixed(1)+'分')
+            })
+            $('.photo span').on('click',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                starRating = index*2;
+                console.log(starRating);
+                $('.starNum').html(starRating.toFixed(1)+'分');
+                document.getElementById("starNum").value=starRating;
+                // alert('评分：'+(starRating.toFixed(1)+'分'))
+            })
+            //取消评分
+            $('.cancleStar').on('click',function () {
+                starRating = 0;
+                $('.photo span').find('.high').css('z-index',0);
+                $('.starNum').html(starRating.toFixed(1)+'分');
+            })
+            //确定评分
+            $('.sureStar').on('click',function () {
+                if(starRating===0) {
+                    alert('最低一颗星！');
+                } else {
+                    alert('评分：'+(starRating.toFixed(1)+'分'))
+                }
+            })
+        })
+    </script>
+    <!--mycart-->
+    <script type="text/javascript" src="/js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="/js/simpleCart.min.js"></script>
+    <!-- cart -->
+    <!-- 下载 -->
+    <!-- Button trigger modal -->
+    <link rel="stylesheet" href="/css/css.css">
+</head>
+<body>
+<!--header-->
+<div class="header">
+    <div class="header-top">
+        <div class="container" th:replace="qd_menu::mymenu0">
+        </div>
+    </div>
+    <div class="heder-bottom">
+        <div class="container" th:replace="qd_menu::mymenu1">
+        </div>
+    </div>
+</div>
+<div class="container" >
+    <div class="grid_1 grid_1">
+        <h2>HR Assess</h2>
+        <ol class="breadcrumb">
+            <li><a href="/user/all" >主页</a></li>
+            <li><a href="/user/busy" >HR推荐</a></li>
+            <li class="active">HR评分</li>
+        </ol>
+    </div>
+    <!--页面居中-->
+        <div class="row">
+            <div  class="col-sm-7">
+                <div class="row">
+                    <div class="form-horizontal">
+                        <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-12">
+                            <span id="inputPassword3" th:text="'姓名：  '+${hr.hr_name}" ></span>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-12">
+                            <span  id="inputPword3" th:text="'账号： '+${hr.hr_account}" ></span>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-12">
+                            <span  id="inputPaord3" th:text="${hr.hr_sex}==true?'性别： 男':'性别： 女'" ></span>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-12">
+                            <span  id="inputPsword3" th:text="'电话： '+${hr.hr_tel}" ></span>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-12">
+                            <span id="inputPasword3"  th:text="'QQ： '+${hr.hr_qq}" ></span>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class="form-group ">
+                        <label for="inputEmail3"  class="col-sm-2 control-label">简介： </label>
+                        <div class="col-sm-12">
+                            <span  id="inputEmail3" th:text="${hr.hr_jl}" ></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <div  class="col-sm-7">
+                        <p><img th:src="'http://localhost:8080/images/upload/'+${hr.hr_headpic}" id="imgshow" class="img-thumbnail"  width="190px" height="300px" ></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <form action="/hr/hrPinFen2" method="post">
+        <input type="hidden" name="hid" th:value="${hr.hid}">
+        <input type="hidden" id="starNum" name="starNum" value=""/>
+        <div id="starRating">
+            <p class="photo">
+                <span><i class="high"></i><i class="nohigh"></i></span>
+                <span><i class="high"></i><i class="nohigh"></i></span>
+                <span><i class="high"></i><i class="nohigh"></i></span>
+                <span><i class="high"></i><i class="nohigh"></i></span>
+                <span><i class="high"></i><i class="nohigh"></i></span>
+            </p>
+            <span class="starNum"></span>
+            <p>意见反馈</p>
+            <textarea  name="pingfenremark" class="form-control" rows="3"></textarea>
+            <div class="bottoms">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消评分</button>
+                <input type="submit" class="btn btn-default" value="评分">
+            </div>
+        </div>
+    </form>
+
+</div>
+<!--主页面-->
+
+<!---footer--->
+<div class="footer-w3l"  style="padding: 15px">
+    <div class="container" th:replace="qd_menu::mymenu2">
+    </div>
+</div>
+<!---footer--->
+</body>
+</html>

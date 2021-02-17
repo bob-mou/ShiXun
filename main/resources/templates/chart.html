@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"  style="height:100%" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="/echarts/echarts.min.js"></script>
+</head>
+<body>
+<div id="container" style="height: 400px;width:600px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('container'));
+    var mydata = [[${nums}]];
+    var mydate = [[${dates}]];
+
+
+   // Console.log("--->"+title);
+    option = {
+        tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: mydate
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: mydata,
+            type: 'bar'
+        }]
+    };
+
+    myChart.setOption(option);
+
+</script>
+</body>
+</html>
